@@ -4,13 +4,39 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.Random;
 
 public class MainActivity extends ActionBarActivity {
+
+    int randomNumber;
+
+    public void checkGuess(View view) {
+        EditText guessedNumber = (EditText) findViewById(R.id.guessedNumber);
+
+        int guess = Integer.parseInt(guessedNumber.getText().toString());
+
+        String message = "";
+        if (guess < randomNumber) {
+            message = "Too Low";
+        } else if (guess > randomNumber) {
+            message = "Too High";
+        } else {
+            message = "Right on!";
+        }
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Random randomGenerator = new Random();
+        randomNumber = randomGenerator.nextInt(21);
     }
 
     @Override
