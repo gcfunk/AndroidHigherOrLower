@@ -18,16 +18,20 @@ public class MainActivity extends ActionBarActivity {
     public void checkGuess(View view) {
         EditText guessedNumber = (EditText) findViewById(R.id.guessedNumber);
 
-        int guess = Integer.parseInt(guessedNumber.getText().toString());
-
         String message = "";
-        if (guess < randomNumber) {
-            message = "Too Low";
-        } else if (guess > randomNumber) {
-            message = "Too High";
-        } else {
-            message = "Right on! Play again?";
-            randomNumber = randomGenerator.nextInt(21);
+        try {
+            int guess = Integer.parseInt(guessedNumber.getText().toString());
+            
+            if (guess < randomNumber) {
+                message = "Too Low";
+            } else if (guess > randomNumber) {
+                message = "Too High";
+            } else {
+                message = "Right on! Play again?";
+                randomNumber = randomGenerator.nextInt(21);
+            }
+        } catch ( Exception e ) {
+            message = "Please enter a number";
         }
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
