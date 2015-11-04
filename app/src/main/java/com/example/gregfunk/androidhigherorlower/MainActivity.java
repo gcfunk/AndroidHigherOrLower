@@ -13,6 +13,7 @@ import java.util.Random;
 public class MainActivity extends ActionBarActivity {
 
     int randomNumber;
+    Random randomGenerator;
 
     public void checkGuess(View view) {
         EditText guessedNumber = (EditText) findViewById(R.id.guessedNumber);
@@ -25,7 +26,8 @@ public class MainActivity extends ActionBarActivity {
         } else if (guess > randomNumber) {
             message = "Too High";
         } else {
-            message = "Right on!";
+            message = "Right on! Play again?";
+            randomNumber = randomGenerator.nextInt(21);
         }
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
@@ -35,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Random randomGenerator = new Random();
+        randomGenerator = new Random();
         randomNumber = randomGenerator.nextInt(21);
     }
 
